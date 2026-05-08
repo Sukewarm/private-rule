@@ -1,7 +1,12 @@
 #!name=O2 Germany Wi-Fi Calling
-#!desc=Route O2 Germany / Telefónica DE Wi-Fi Calling (VoWiFi/ePDG) traffic through the selected Loon proxy policy. Add this plugin with policy=your Germany proxy group.
+#!desc=O2 Germany / Telefónica DE Wi-Fi Calling (VoWiFi/ePDG). PROXY is a selectable placeholder in Loon plugin settings; choose your Germany policy group for PROXY after importing.
 #!author=Sukewarm
 #!homepage=https://github.com/Sukewarm/private-rule
+
+# IMPORTANT
+# In a Loon plugin, PROXY is not a fixed policy group name.
+# PROXY means: choose the policy manually in Loon's plugin settings.
+# After importing this plugin, set the plugin's PROXY option to your Germany node or Germany policy group.
 
 [Rule]
 # O2 Germany / Telefónica DE ePDG domains
