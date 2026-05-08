@@ -1,0 +1,27 @@
+#!name=O2 Germany Wi-Fi Calling
+#!desc=Route O2 Germany / Telefónica DE Wi-Fi Calling (VoWiFi/ePDG) traffic through the selected Loon proxy policy. Add this plugin with policy=your Germany proxy group.
+#!author=Sukewarm
+#!homepage=https://github.com/Sukewarm/private-rule
+
+[Rule]
+# O2 Germany / Telefónica DE ePDG domains
+DOMAIN-SUFFIX,mnc003.mcc262.pub.3gppnetwork.org,PROXY
+DOMAIN-SUFFIX,mnc005.mcc262.pub.3gppnetwork.org,PROXY
+DOMAIN-SUFFIX,mnc007.mcc262.pub.3gppnetwork.org,PROXY
+DOMAIN-SUFFIX,mnc008.mcc262.pub.3gppnetwork.org,PROXY
+DOMAIN-SUFFIX,mnc011.mcc262.pub.3gppnetwork.org,PROXY
+DOMAIN-SUFFIX,mnc012.mcc262.pub.3gppnetwork.org,PROXY
+DOMAIN-SUFFIX,mnc016.mcc262.pub.3gppnetwork.org,PROXY
+DOMAIN-SUFFIX,mnc017.mcc262.pub.3gppnetwork.org,PROXY
+DOMAIN-SUFFIX,mnc020.mcc262.pub.3gppnetwork.org,PROXY
+DOMAIN-SUFFIX,mnc077.mcc262.pub.3gppnetwork.org,PROXY
+
+# IP fallback for Telefónica Germany ePDG gateways
+IP-CIDR,62.52.52.30/32,PROXY,no-resolve
+IP-CIDR,213.20.175.56/32,PROXY,no-resolve
+IP-CIDR,213.20.151.16/32,PROXY,no-resolve
+IP-CIDR,213.20.31.8/32,PROXY,no-resolve
+
+# Optional broad fallback: IPsec/IKE and NAT-T usually use UDP 500/4500.
+# This may also match other VPN/IPsec traffic, so disable this line if it affects other apps.
+AND,((PROTOCOL,UDP),(OR,((DEST-PORT,500),(DEST-PORT,4500)))),PROXY
