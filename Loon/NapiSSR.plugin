@@ -1,5 +1,5 @@
 #!name=Napi SSR
-#!desc=获取 NapiSSR 节点订阅。启用插件后，添加订阅 https://napi.ltd/NapiSSR；更新订阅时必须保持本插件开启。仅匹配 napi.ltd，不做全局 MITM。
+#!desc=无 MITM 版本：用 HTTP 订阅链接触发本地脚本，避免 script-path 与 MITM hostname 同域冲突。订阅请添加 http://napi.ltd/NapiSSR，不要添加 https。
 #!author=Sukewarm
 #!homepage=https://github.com/Sukewarm/private-rule
 #!date=2026-05-10
@@ -7,16 +7,20 @@
 # 使用方法：
 # 1. Loon -> 插件 -> 添加插件，导入本文件的 raw 链接。
 # 2. 启用插件。
-# 3. 添加节点订阅：https://napi.ltd/NapiSSR
+# 3. 添加节点订阅时，不要用官方写的 https 链接，改用下面这个 HTTP 触发链接：
+#    http://napi.ltd/NapiSSR
 # 4. 更新节点订阅时，必须保持本插件开启。
 #
-# 注意：
-# - 不要用浏览器直接打开 https://napi.ltd/script/Worker/NapiSSR.js
-# - 该插件只负责把 NapiSSR.js 挂到 Loon 的脚本拦截里。
-# - 免费 SSR 节点不建议用于银行、交易所、邮箱、Apple ID 等重要账号。
+# 为什么不用 [MITM]：
+# - 原教程的脚本地址和订阅地址都在 napi.ltd。
+# - 如果写 hostname = napi.ltd，Loon 拉取 script-path=https://napi.ltd/script/Worker/NapiSSR.js 时也会撞到同一个 MITM/风控域名。
+# - 所以这里改成 HTTP 订阅触发，不写 [MITM]，让脚本下载和订阅拦截分开。
+#
+# 如果仍然失败：
+# - 说明 napi.ltd 对 script-path 本身做了更严格的 UA/环境风控。
+# - 这种情况下需要先拿到真实 NapiSSR.js，再镜像到自己的 GitHub raw 链接，script-path 改成你自己的 raw 地址。
+#
+# 风险提醒：免费 SSR 节点不建议用于银行、交易所、邮箱、Apple ID 等重要账号。
 
 [Script]
-http-request ^https?:\/\/napi\.ltd\/NapiSSR$ script-path=https://napi.ltd/script/Worker/NapiSSR.js,tag=@点击添加节点订阅,timeout=30,enable=true
-
-[MITM]
-hostname = napi.ltd
+http-request ^http:\/\/napi\.ltd\/NapiSSR$ script-path=https://napi.ltd/script/Worker/NapiSSR.js,tag=@点击添加节点订阅,timeout=30,enable=true
