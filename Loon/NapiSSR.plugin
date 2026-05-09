@@ -1,0 +1,22 @@
+#!name=Napi SSR
+#!desc=获取 NapiSSR 节点订阅。启用插件后，添加订阅 https://napi.ltd/NapiSSR；更新订阅时必须保持本插件开启。仅匹配 napi.ltd，不做全局 MITM。
+#!author=Sukewarm
+#!homepage=https://github.com/Sukewarm/private-rule
+#!date=2026-05-10
+
+# 使用方法：
+# 1. Loon -> 插件 -> 添加插件，导入本文件的 raw 链接。
+# 2. 启用插件。
+# 3. 添加节点订阅：https://napi.ltd/NapiSSR
+# 4. 更新节点订阅时，必须保持本插件开启。
+#
+# 注意：
+# - 不要用浏览器直接打开 https://napi.ltd/script/Worker/NapiSSR.js
+# - 该插件只负责把 NapiSSR.js 挂到 Loon 的脚本拦截里。
+# - 免费 SSR 节点不建议用于银行、交易所、邮箱、Apple ID 等重要账号。
+
+[Script]
+http-request ^https?:\/\/napi\.ltd\/NapiSSR$ script-path=https://napi.ltd/script/Worker/NapiSSR.js,tag=@点击添加节点订阅,timeout=30,enable=true
+
+[MITM]
+hostname = napi.ltd
