@@ -7,8 +7,8 @@
 # 使用方法：
 # 1. 把你的 ssr:// 节点一行一个放到：
 #    Loon/PrivateSSR.list
-# 2. Loon 导入本插件：
-#    https://raw.githubusercontent.com/Sukewarm/private-rule/main/Loon/PrivateSSR.plugin
+# 2. Loon 导入本插件。GitHub raw 链接建议用 http://raw 开头：
+#    http://raw.githubusercontent.com/Sukewarm/private-rule/main/Loon/PrivateSSR.plugin
 # 3. Loon 添加节点订阅：
 #    http://private.ssr/sub
 # 4. 更新订阅时保持本插件开启。
