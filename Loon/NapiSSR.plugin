@@ -1,32 +1,27 @@
-#!name=Napi SSR
-#!desc=按原 Napi 资源入口思路制作：脚本 URL 本身也参与匹配；插件页可点 openUrl 导入节点订阅。更新订阅时必须保持插件开启。
+#!name=NapiSSR 原链接说明（不可镜像）
+#!desc=此文件不再尝试包装 napi.ltd 原脚本。原 NapiSSR.js 对普通访问返回 404，GitHub 静态插件无法复刻其服务端风控返回。请直接在 Loon 内添加官方脚本链接，或先拿到真实源码后再镜像。
 #!author=Sukewarm
 #!homepage=https://github.com/Sukewarm/private-rule
-#!openUrl=loon://import?nodelist=https%3A%2F%2Fnapi.ltd%2FNapiSSR
 #!date=2026-05-10
 
-# 说明：
-# 1. 原链接 https://napi.ltd/script/Worker/NapiSSR.js 不是普通浏览器可读 JS。
-# 2. 它在 Loon 里应当作为“插件/重写资源入口”引用，而不是只当作普通 script-path。
-# 3. 因此这里同时保留两个入口：
-#    - 脚本资源入口：/script/Worker/NapiSSR.js
-#    - 节点订阅入口：/NapiSSR
-# 4. 插件页可点 openUrl，或者手动添加节点订阅：
-#    https://napi.ltd/NapiSSR
-# 5. 若 Loon 日志出现 Unexpected token '<'，说明拿到的仍是 404 HTML，不是真正脚本/插件资源。
+# 这个文件是防误用说明，不再包含错误的 [Script]/[MITM] 包装。
 #
-# 风险提醒：免费 SSR 节点不建议用于银行、交易所、邮箱、Apple ID 等重要账号。
+# 正确使用原 NapiSSR 的方式：
+# 1. Loon -> 插件 -> 添加插件
+# 2. 直接填写官方脚本链接：
+#    https://napi.ltd/script/Worker/NapiSSR.js
+# 3. 启用后再添加节点订阅：
+#    https://napi.ltd/NapiSSR
+#
+# 为什么这里不能镜像：
+# - GitHub raw 是静态文件。
+# - Loon 插件 URL 内容必须是 Loon 配置格式。
+# - napi.ltd/script/Worker/NapiSSR.js 对普通访问返回 404 HTML，不是真实插件/脚本源码。
+# - 没有真实源码时，不能凭空复刻它的本地节点生成逻辑。
+#
+# 我另放了一个真正可用的私有订阅生成器模板：
+# https://raw.githubusercontent.com/Sukewarm/private-rule/main/Loon/PrivateSSR.plugin
 
 [URL Rewrite]
-# 保留脚本 URL 本身的匹配入口；原 Napi 资源就是围绕这个 URL 做解析/重写的。
-^https?:\/\/napi\.ltd\/script\/Worker\/NapiSSR\.js.*$ https://napi.ltd/script/Worker/NapiSSR.js 302
-
-[Script]
-# 脚本资源入口：保留对 NapiSSR.js 本身的匹配，避免漏掉原脚本针对自身 URL 的逻辑。
-http-request ^https?:\/\/napi\.ltd\/script\/Worker\/NapiSSR\.js.*$ script-path=https://napi.ltd/script/Worker/NapiSSR.js,tag=NapiSSR脚本入口,timeout=30,enable=true
-
-# 节点订阅入口：添加 / 更新 https://napi.ltd/NapiSSR 时由脚本在本地生成节点数据。
-http-request ^https?:\/\/napi\.ltd\/NapiSSR.*$ script-path=https://napi.ltd/script/Worker/NapiSSR.js,tag=@点击添加节点订阅,timeout=30,enable=true
-
-[MITM]
-hostname = napi.ltd
+# 空规则：避免这个说明文件误改流量。
+^https?:\/\/example\.invalid\/NapiSSR$ reject
