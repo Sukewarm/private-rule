@@ -1,0 +1,20 @@
+#!name=Private SSR Subscription
+#!desc=把仓库里的 Loon/PrivateSSR.list 伪装成一个本地节点订阅。添加订阅地址：http://private.ssr/sub
+#!author=Sukewarm
+#!homepage=https://github.com/Sukewarm/private-rule
+#!date=2026-05-10
+
+# 使用方法：
+# 1. 把你的 ssr:// 节点一行一个放到：
+#    Loon/PrivateSSR.list
+# 2. Loon 导入本插件：
+#    https://raw.githubusercontent.com/Sukewarm/private-rule/main/Loon/PrivateSSR.plugin
+# 3. Loon 添加节点订阅：
+#    http://private.ssr/sub
+# 4. 更新订阅时保持本插件开启。
+#
+# 这个模板不需要 MITM，因为订阅触发 URL 是 HTTP。
+# 它只会从你的 GitHub raw 文件读取节点列表，不会碰 napi.ltd。
+
+[Script]
+http-request ^http:\/\/private\.ssr\/sub$ script-path=https://raw.githubusercontent.com/Sukewarm/private-rule/main/Loon/PrivateSSR.js,tag=Private SSR Subscription,timeout=20,enable=true
