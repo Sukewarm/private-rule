@@ -1,0 +1,11 @@
+# 一行一个节点，示例：
+# ssr://example
+#
+# 支持的 URI 前缀：
+# ssr://
+# ss://
+# vmess://
+# vless://
+# trojan://
+# hysteria2://
+# hy2://
