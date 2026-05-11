@@ -1,5 +1,5 @@
 #!name=club vowifi
-#!desc=Club SIM / csl Wi-Fi Calling 规则；每条规则显式指向 PROXY，方便在 Loon 插件中映射/选择香港节点或香港策略组。
+#!desc=Club SIM / csl Wi-Fi Calling；规则全部显式指向 PROXY。导入后进入插件配置，把 PROXY 手动映射到香港节点或香港策略组。
 #!author=ChatGPT
 #!homepage=https://www.clubsim.com.hk/
 
@@ -16,5 +16,5 @@ DOMAIN,ss.epdg.epc.mnc000.mcc454.pub.3gppnetwork.org,PROXY
 DOMAIN,ss.epdg.epc.geo.mnc000.mcc454.pub.3gppnetwork.org,PROXY
 DOMAIN-SUFFIX,mnc000.mcc454.pub.3gppnetwork.org,PROXY
 
-# iOS Wi-Fi Calling / Apple location check, required by many iPhone DPs
+# iOS Wi-Fi Calling / Apple location check
 DOMAIN,gspe1-ssl.ls.apple.com,PROXY
