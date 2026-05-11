@@ -1,0 +1,20 @@
+#!name=ClubSIM VoWiFi Default PROXY
+#!desc=Club SIM / csl Wi-Fi Calling 规则；本插件规则不写策略，按 Loon 机制默认使用 PROXY。请在 Loon 将 PROXY 映射到香港策略或香港节点。
+#!author=ChatGPT
+#!homepage=https://www.clubsim.com.hk/
+
+[Rule]
+# Club SIM / csl eSIM & ODC
+DOMAIN,csl.prod.ondemandconnectivity.com
+DOMAIN,hhk.prod.ondemandconnectivity.com
+DOMAIN-SUFFIX,csl.prod.ondemandconnectivity.com
+DOMAIN-SUFFIX,hhk.prod.ondemandconnectivity.com
+
+# Club SIM / csl VoWiFi ePDG, MCC 454 / MNC 000
+DOMAIN,epdg.epc.mnc000.mcc454.pub.3gppnetwork.org
+DOMAIN,ss.epdg.epc.mnc000.mcc454.pub.3gppnetwork.org
+DOMAIN,ss.epdg.epc.geo.mnc000.mcc454.pub.3gppnetwork.org
+DOMAIN-SUFFIX,mnc000.mcc454.pub.3gppnetwork.org
+
+# iOS Wi-Fi Calling / Apple location check, required by many iPhone DPs
+DOMAIN,gspe1-ssl.ls.apple.com
