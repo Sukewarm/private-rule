@@ -1,0 +1,11 @@
+#!name=Tuyo KYC
+#!desc=提取 Persona Inquiry 链接并通过通知显示 Hosted Flow
+#!author=Sukewarm
+#!homepage=https://github.com/Sukewarm/private-rule
+#!date=2026-08-29
+
+[Script]
+http-response ^https:\/\/withpersona\.com\/api\/internal\/verify\/v1\/inquiries(?:\?.*)?$ script-path=https://raw.githubusercontent.com/Sukewarm/private-rule/main/Loon/TuyoKYC.js,requires-body=true,max-size=0,timeout=10,tag=Tuyo KYC,enable=true
+
+[MITM]
+hostname = withpersona.com
